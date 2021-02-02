@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in
   def index
-     @users = User.order(id: :desc).page(params[:page]).per(25)
+    @users = User.order(id: :desc)
   end
 
   def show
@@ -22,6 +22,17 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
+  end
+  
+  def edit
+    @user =User.find(params[:id])
+  end
+  
+  def destroy
+    @user =User.find(params[:id])
+    
+    
+    redirect_to root,'ユーザを削除しました。'
   end
 
   private
