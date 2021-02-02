@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
     if @task.update(task_params)
        flash[:success] = 'Task は正常に更新されました'
-       redirect_to @task
+       redirect_to user_path
     else
        flash.now[:danger] = 'Task は更新されませんでした'
        render :edit
@@ -57,4 +57,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:content, :status).merge(user_id:current_user.id)
   end
+  
 end
